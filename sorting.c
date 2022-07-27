@@ -1,14 +1,27 @@
 #include <math.h>
 #include <stdio.h>
 
-//Part of selection sort algorithm
 void swap(int *xp, int *yp)
 {
     int temp = *xp;
     *xp = *yp;
     *yp = temp;
 }
+
+//Bubble sort 
+void bubbleSort(int arr[], int n)
+{
+    int i, j;
+    for (i = 0; i < n - 1; i++)
   
+        for (j = 0; j < n - i - 1; j++)
+            if (arr[j] > arr[j + 1])
+                swap(&arr[j], &arr[j + 1]);
+}
+
+
+
+//selection sort algorithm
 void selectionSort(int arr[], int n)
 {
     int i, j, min_idx;
@@ -70,7 +83,7 @@ int main()
     }
 
     int choice;
-    printf("Enter 1 for insertion sort, 2 for selection sort : ");
+    printf("Enter 1 for insertion sort, 2 for selection sort, 3 for bubble sort : ");
     scanf("%d",&choice);
 
     if(choice==1)
@@ -84,6 +97,11 @@ int main()
     {
         selectionSort(arr, n);
         printf("The sorted array using Selection sort algorithm is\n");
+    }
+    else if(choice==3)
+    {
+        bubbleSort(arr, n);
+        printf("The sorted array using Bubble sort algorithm is\n");
     }
     
     printArray(arr, n);
