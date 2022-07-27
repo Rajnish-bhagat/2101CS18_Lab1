@@ -9,7 +9,35 @@ void swap(int *xp, int *yp)
     *yp = temp;
 }
 
-
+//Quick sort
+int partition(int arr[], int low, int high)
+{
+    int i = low;
+    int j = high;
+    int pivot = arr[low];
+    while (i < j)
+    {
+        while (pivot >= arr[i])
+            i++;
+        while (pivot < arr[j])
+            j--;
+        if (i < j)
+            swap(&arr[i], &arr[j]);
+    }
+    swap(&arr[low], &arr[j]);
+    return j;
+}
+  
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        int pivot = partition(arr, low, high);
+        quickSort(arr, low, pivot - 1);
+        quickSort(arr, pivot + 1, high);
+    }
+}
+  
 //Merge sort
 void merge(int arr[], int l, int m, int r)
 {
@@ -143,7 +171,7 @@ int main()
     }
 
     int choice;
-    printf("Enter 1 for insertion sort, 2 for selection sort, 3 for bubble sort, 4 for merge sort : ");
+    printf("Enter 1 for insertion sort, 2 for selection sort, 3 for bubble sort, 4 for merge sort, 5 for quick sort : ");
     scanf("%d",&choice);
 
     if(choice==1)
@@ -167,6 +195,11 @@ int main()
     {
         mergeSort(arr, 0, n-1);
         printf("The sorted array using Merge sort algorithm is\n");
+    }
+    else if(choice==5)
+    {
+        quickSort(arr, 0, n-1);
+        printf("The sorted array using Quick sort algorithm is\n");
     }
     
     
