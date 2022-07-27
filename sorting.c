@@ -1,6 +1,31 @@
 #include <math.h>
 #include <stdio.h>
 
+//Part of selection sort algorithm
+void swap(int *xp, int *yp)
+{
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
+  
+void selectionSort(int arr[], int n)
+{
+    int i, j, min_idx;
+    for (i = 0; i < n-1; i++)
+    {
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+          if (arr[j] < arr[min_idx])
+            min_idx = j;
+  
+        
+        swap(&arr[min_idx], &arr[i]);
+    }
+}
+
+
+
 /* Function for sorting an array using insertion sort algorithm */
 void insertionSort(int arr[], int n)
 {
@@ -17,7 +42,6 @@ void insertionSort(int arr[], int n)
 		}
 		arr[j + 1] = key;
 	}
-    printf("The sorted array using Insertion sort algorithm is\n");
 }
 
 // A function to print an array of size n
@@ -45,10 +69,24 @@ int main()
         scanf("%d",&arr[i]);
     }
 
-    //function call for insertion sort
-	insertionSort(arr, n);
-    //printing sorted array
-	printArray(arr, n);
+    int choice;
+    printf("Enter 1 for insertion sort, 2 for selection sort : ");
+    scanf("%d",&choice);
+
+    if(choice==1)
+    {
+       //function call for insertion sort
+	   insertionSort(arr, n);
+       //printing sorted array
+       printf("The sorted array using Insertion sort algorithm is\n");
+    }
+    else if(choice==2)
+    {
+        selectionSort(arr, n);
+        printf("The sorted array using Selection sort algorithm is\n");
+    }
+    
+    printArray(arr, n);
 
 	return 0;
 }
